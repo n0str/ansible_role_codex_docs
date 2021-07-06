@@ -1,2 +1,45 @@
 ---
-# tasks file for codex-docs
+
+- name: Create target directory
+  file:
+    path: "{{ install_dir }}"
+    state: directory
+    mode: 0755
+
+- name: Create uploads directory
+  file:
+    path: "{{ install_dir }}/uploads"
+    state: directory
+    mode: 0755
+
+- name: Create database directory
+  file:
+    path: "{{ install_dir }}/.db"
+    state: directory
+    mode: 0755
+
+- name: Create production config
+  copy:
+    dest: "{{ install_dir }}/production.json"
+    content: "{{ config }}"
+
+- name: Create main config
+  copy:
+    dest: "{{ install_dir }}/.codexdocsrc"
+    content: "{{ codexdocssrc }}"
+
+- name: Copy docker-compose.yml file
+  template:
+    src: docker-compose.yml.j2
+    dest: "{{ install_dir }}/docker-compose.yml"
+    mode: 0644
+  notify: Restart codex-docs service
+
+- name: Up codex-docs service
+  community.docker.docker_compose:
+    project_src: "{{ install_dir }}"
+
+- name: Set password
+  shell: "docker-compose exec docs yarn generatePassword {{ config.secret }}"
+  args:
+    chdir: "{{ install_dir }}"

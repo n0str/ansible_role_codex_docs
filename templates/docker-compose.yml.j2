@@ -1,0 +1,14 @@
+version: "3.2"
+services:
+  docs:
+    image: codexteamuser/codex-docs:prod
+    ports:
+      - {{ listen_interface }}:{{listen_port}}:3000
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+    volumes:
+      - ./.codexdocsrc:/usr/src/app/.codexdocsrc:ro
+      - ./production.json:/usr/src/app/config/production.json:ro
+      - ./uploads:/usr/src/app/public/uploads
+      - ./.db:/usr/src/app/.db

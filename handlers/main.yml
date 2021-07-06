@@ -1,0 +1,7 @@
+---
+
+- name: Restart codex-docs service
+  community.docker.docker_compose:
+    project_src: "{{ install_dir }}"
+    state: present
+    restarted: true

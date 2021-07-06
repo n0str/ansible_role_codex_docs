@@ -1,2 +1,26 @@
 ---
-# defaults file for codex-docs
+
+install_dir: "/opt/codex-docs/"
+listen_interface: '127.0.0.1'
+listen_port: 3000
+image_tag: 'prod'
+
+codexdocssrc:
+  title:
+  description:
+  menu:
+    - About
+    - title: Support Project
+      uri: /support
+  landingFrameSrc:
+  startPage: main
+  misprintsChatId:
+  yandexMetrikaId:
+  carbon:
+    serve:
+    placement:
+
+config:
+  database: ".db"
+  uploads: "public/uploads"
+  secret: "secret"
