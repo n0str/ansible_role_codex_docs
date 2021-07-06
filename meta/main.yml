@@ -1,0 +1,20 @@
+galaxy_info:
+  author: N0str
+  description: Ansible role for codex-docs documentation engine installation
+  company: CodeX Team
+  license: MIT
+  min_ansible_version: 2.1
+
+  platforms:
+    - name: Ubuntu
+      versions:
+        - bionic
+        - xenial
+        - focal
+
+  galaxy_tags:
+    - codex
+    - documentation
+    - development
+
+dependencies: []
