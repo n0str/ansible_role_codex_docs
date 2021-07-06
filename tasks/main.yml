@@ -22,11 +22,13 @@
   copy:
     dest: "{{ install_dir }}/production.json"
     content: "{{ config }}"
+    mode: 0644
 
 - name: Create main config
   copy:
     dest: "{{ install_dir }}/.codexdocsrc"
     content: "{{ codexdocssrc }}"
+    mode: 0644
 
 - name: Copy docker-compose.yml file
   template:
@@ -43,3 +45,5 @@
   shell: "docker-compose exec docs yarn generatePassword {{ config.secret }}"
   args:
     chdir: "{{ install_dir }}"
+  tags:
+    - skip_ansible_lint
