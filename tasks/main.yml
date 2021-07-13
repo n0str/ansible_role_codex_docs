@@ -23,6 +23,7 @@
     dest: "{{ install_dir }}/production.json"
     content: "{{ config }}"
     mode: 0644
+  register: prod_config
 
 - name: Create main config
   copy:
@@ -47,3 +48,4 @@
     chdir: "{{ install_dir }}"
   tags:
     - skip_ansible_lint
+  when: prod_config.changed
